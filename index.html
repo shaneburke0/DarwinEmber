@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+    <title>Ancestry.com® Darwin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" media="screen">
+</head>
+
+<body>
+
+<script type="text/x-handlebars" data-template-name="application">
+    {{outlet}}
+</script>
+
+<!-- Tree template -->
+<script type="text/x-handlebars" data-template-name="tree">
+    <h1>Individual tree</h1>
+    <div>{{title}}</div>
+    <ul>
+          {{#each people}}
+            <li>{{name}}</li>
+          {{/each}}
+    </ul>
+</script>
+
+<!-- Trees list templete -->
+<script type="text/x-handlebars" data-template-name="trees/index">
+        {{#each itemController="tree"}}
+        <li>{{#link-to 'tree' id}}{{title}}{{/link-to}}</li>
+        {{/each}}
+</script>
+
+<!-- Global template -->
+
+<script type="text/x-handlebars" data-template-name="trees/upload">
+    <h1>Upload GEDCOM</h1>
+    <input class="form-control" type="file">
+</script>
+
+<script type="text/x-handlebars" data-template-name="tree/edit">
+    <h1>Edit tree</h1>
+    <P>
+        We need to figure out how to edit the current tree here.
+    </P>
+</script>
+
+<script type="text/x-handlebars" data-template-name="trees/create">
+    <h1>Create Tree</h1>
+    <P>
+        {{input type="text" id="new-tree" placeholder="Add a tree"
+        value=newTitle action="createTree" target="trees"}}
+    </P>
+</script>
+
+<script type="text/x-handlebars" data-template-name="trees">
+    <div class="container">
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Darwin Ember</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Trees <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            {{outlet treelist}}
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Tree options</li>
+                            <li>{{#link-to "trees.create"}}Create new tree{{/link-to}}</li>
+                            <li>{{#link-to "trees.upload"}}Upload GEDCOM{{/link-to}}</li>
+                            <li>{{#link-to "trees.edit"}}Edit current tree{{/link-to}}</li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Search</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Palmerhyde<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Account</a></li>
+                            <li><a href="#">Terms and conditions</a></li>
+                            <li><a href="#">Privacy statement</a></li>
+                            <li><a href="#">Sign out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+             {{outlet main}}
+        </div>
+    </div>
+</script>
+
+<!-- Scripts -->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="scripts/handlebars.js"></script>
+<script src="http://builds.emberjs.com/release/ember.js"></script>
+<script src="http://builds.emberjs.com/beta/ember-data.js"></script>
+<script src="scripts/application.js"></script>
+<script src="scripts/router.js"></script>
+<script src="scripts/models.js"></script>
+<script src="scripts/controllers.js"></script>
+ </body>
+</html>
